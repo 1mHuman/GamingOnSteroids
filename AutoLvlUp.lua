@@ -1,4 +1,4 @@
-PrintChat("ImHuman's Auto Leveller Loaded!")
+PrintChat("ImHuman's Auto Level Up Utility Loaded!")
 First = scriptConfig("FLVlUP", "LVlUp First:")
 First.addParam("Q", "Full Q", SCRIPT_PARAM_ONOFF, false)
 First.addParam("W", "Full W", SCRIPT_PARAM_ONOFF, false)
