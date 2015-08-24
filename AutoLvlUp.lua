@@ -1,110 +1,76 @@
+require('DLib')
 PrintChat("ImHuman's Auto Level Up Utility Loaded!")
-First = scriptConfig("FLVlUP", "LVlUp First:")
-First.addParam("Q", "Full Q", SCRIPT_PARAM_ONOFF, false)
-First.addParam("W", "Full W", SCRIPT_PARAM_ONOFF, false)
-First.addParam("E", "Full E", SCRIPT_PARAM_ONOFF, false)
-Second = scriptConfig("SLVlUP", "LVlUp Second:")
-Second.addParam("Q", "Full Q", SCRIPT_PARAM_ONOFF, false)
-Second.addParam("W", "Full W", SCRIPT_PARAM_ONOFF, false)
-Second.addParam("E", "Full E", SCRIPT_PARAM_ONOFF, false)
-Third = scriptConfig("TLVlUP", "LVlUp Third:")
-Third.addParam("Q", "Full Q", SCRIPT_PARAM_ONOFF, false)
-Third.addParam("W", "Full W", SCRIPT_PARAM_ONOFF, false)
-Third.addParam("E", "Full E", SCRIPT_PARAM_ONOFF, false)
+local submenu = menu.addItem(SubMenu.new("Auto Level Up"))
+local active = submenu.addItem(MenuBool.new("Active"))
+local level = submenu.addItem(MenuSlider.new("Begin at Level :", 2,1,17,1))
+local s1 = submenu.addItem(MenuStringList.new("First", {"R", "Q", "W", "E"}))
+local s2 = submenu.addItem(MenuStringList.new("Second", {"Q", "W", "E", "R"}))
+local s3 = submenu.addItem(MenuStringList.new("Third", {"W", "Q", "E", "R"}))
+local s4 = submenu.addItem(MenuStringList.new("Fourth", {"E", "Q", "W", "R"}))
 
 OnLoop(function(myHero)
 
-if GetLevel(myHero) == 6 or GetLevel(myHero) == 11 or GetLevel(myHero) == 16 then
-		LevelSpell(_R)
-	end
+local up = nil
+local up2 = nil
+local up3 = nil
+local up4 = nil
+if active.getValue() == true then
+if GetLevel(myHero) >= level.getValue() then
+if level.getValue() == 1 or level.getValue() == 2 then
+if GetLevel(myHero) == 3 then
+if s4.getValue() == 1 then
+LevelSpell(_E)
+elseif s4.getValue() == 2 then
+LevelSpell(_Q)
+elseif s4.getValue() == 3 then
+LevelSpell(_W)
+elseif s4.getValue() == 4 then
+LevelSpell(_R)
+end
+end
+end
+if s1.getValue() == 1 then
+up = LevelSpell(_R)
+elseif s1.getValue() == 2 then
+up = LevelSpell(_Q)
+elseif s1.getValue() == 3 then
+up = LevelSpell(_W)
+elseif s1.getValue() == 4 then
+up = LevelSpell(_E)
+end
 
-	if GetLevel(myHero) == 3 then
-	if Third.Q then
-	LevelSpell(_Q);
-	elseif Third.W then
-	LevelSpell(_W);
-	else
-	LevelSpell(_E);
-	end
-	end
+if s2.getValue() == 1 and up == false then
+up2 = LevelSpell(_Q)
+elseif s2.getValue() == 2 and up == false then
+up2 = LevelSpell(_W)
+elseif s2.getValue() == 3 and up == false then
+up2 = LevelSpell(_E)
+elseif s2.getValue() == 4 and up == false then
+up2 = LevelSpell(_R)
+end
 
-local fir = nil
-local sec = nil
-local thir = nil
-if GetLevel(myHero) >= 2 then
-if First.Q then
- lvlq = LevelSpell(_Q);
- fir = q
-elseif First.W then
-lvlw = LevelSpell(_W);
-fir = w
-	else
-	lvle = LevelSpell(_E);
-	fir = e
-	end
-
-    if fir == q and lvlq == false then
-	if Second.W then
-	LevelSpell(_W);
-	sec = w
-	else
-	LevelSpell(_E);
-	sec = e
-	end
-	end
-
-	if fir == w and lvlw == false then
-	if Second.Q then
-	LevelSpell(_Q);
-	sec = q
-	else
-	LevelSpell(_E);
-	sec = e
-	end
-	end
-
-	if fir == e and lvle == false then
-	if Second.Q then
-	LevelSpell(_Q);
-	sec = q
-	else
-	LevelSpell(_W);
-	sec = w
-	end
-	end
+if s3.getValue() == 1 and up == false and up2 == false then
+up3 = LevelSpell(_W)
+elseif s3.getValue() == 2 and up == false and up2 == false then
+up3 = LevelSpell(_Q)
+elseif s3.getValue() == 3 and up == false and up2 == false then
+up3 = LevelSpell(_E)
+elseif s3.getValue() == 4 and up == false and up2 == false then
+up3 = LevelSpell(_R)
+end
 
 
-	if sec == q and lvlq == false then
-	if Third.W then
-	LevelSpell(_W);
-	thir = w
-	else
-	LevelSpell(_E)
-	thir = e
-	end
-	end
+if s4.getValue() == 1 and up == false and up2 == false and up3 == false then
+up4 = LevelSpell(_E)
+elseif s4.getValue() == 2 and up == false and up2 == false and up3 == false then
+up4 = LevelSpell(_Q)
+elseif s4.getValue() == 3 and up == false and up2 == false and up3 == false then
+up4 = LevelSpell(_W)
+elseif s4.getValue() == 4 and up == false and up2 == false and up3 == false then
+up4 = LevelSpell(_R)
+end
 
 
-	if sec == w and lvlw == false then
-	if Third.Q then
-	LevelSpell(_Q);
-	thir = q
-	else
-	LevelSpell(_E)
-	thir = e
-	end
-	end
-
-	if sec == e and lvle == false then
-	if Third.Q then
-	LevelSpell(_Q);
-	thir = q
-	else
-	LevelSpell(_W)
-	thir = w
-	end
-	end
-
-
-	end
+end
+end
 end)
