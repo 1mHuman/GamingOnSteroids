@@ -5,7 +5,7 @@ ViMenu:SubMenu("Combo", "Combo")
 ViMenu.Combo:Boolean("Q", "Use Q", true)
 ViMenu.Combo:Boolean("E", "Use E", true)
 ViMenu.Combo:Boolean("R", "Use R", true)
-ViMenu.Combo:Slider("Rhp", "Use if Target Health % <", 30, 1, 100, 1)
+ViMenu.Combo:Slider("Rhp", "Use R if Target Health % <", 30, 1, 100, 1)
 
 ViMenu:SubMenu("Harass", "Harass")
 ViMenu.Harass:Boolean("Q", "Use Q", true)
